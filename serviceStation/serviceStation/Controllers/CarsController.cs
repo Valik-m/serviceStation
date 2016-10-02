@@ -15,26 +15,15 @@ namespace serviceStation.Controllers
     {
         private ServiceStationContext db = new ServiceStationContext();
 
-        // GET: Cars
-        public ActionResult Index()
-        {
-            var cars = db.Cars.Include(c => c.Client);
-            return View(cars.ToList());
-        }
-
         // GET: Cars/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Index(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Car car = db.Cars.Find(id);
-            if (car == null)
-            {
-                return HttpNotFound();
-            }
-            return View(car);
+            Client client = db.Clients.Find(id);
+            return View(client);
         }
 
         // GET: Cars/Create

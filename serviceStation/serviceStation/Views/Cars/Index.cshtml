@@ -1,7 +1,8 @@
-﻿@model IEnumerable<serviceStation.Models.Car>
+﻿@model serviceStation.Models.Client
 
 @{
     Layout = null;
+    var testCar = Model.Cars.First();
 }
 
 <!DOCTYPE html>
@@ -12,54 +13,103 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Client.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Make)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Year)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vin)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Make)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vin)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.CarId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.CarId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.CarId })
-            </td>
-        </tr>
-    }
-    
-    </table>
+    <div>
+        <h4>Client</h4>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Birthday)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Birthday)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+        </dl>
+        @{
+            var grid = new WebGrid(source: Model.Cars);
+        }
+       @grid.GetHtml();
+<table class="table">
+<tr>
+    <th>
+        @Html.DisplayNameFor(model => testCar.Model)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => testCar.Make)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => testCar.Year)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => testCar.Vin)
+    </th>
+    <th></th>
+</tr>
+
+@foreach (var item in Model.Cars)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => testCar.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => testCar.Make)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => testCar.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => testCar.Vin)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.CarId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.CarId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CarId })
+        </td>
+    </tr>
+}
+
+</table>
 </body>
+
 </html>
