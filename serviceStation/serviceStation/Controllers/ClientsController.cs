@@ -14,15 +14,18 @@ namespace serviceStation.Controllers
     public class ClientsController : Controller
     {
         private ServiceStationContext db = new ServiceStationContext();
-
         // GET: Clients
         public ActionResult Index()
         {
             if (Request.Form["searchInput"]!=null)
             {
-                db.Clients.Where();
+                var searchString = Request.Form["searchInput"];
+                return View(db.Clients.Where(c => c.FirstName.Contains(searchString)));
             }
-            else return View(db.Clients.ToList());
+            else
+            {
+                return View(db.Clients.ToList());
+            }
         }
 
         // GET: Clients/Details/5

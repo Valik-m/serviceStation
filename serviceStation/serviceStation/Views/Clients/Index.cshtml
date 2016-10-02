@@ -15,17 +15,21 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <fieldset name="Search">
-        @{
-            using (Html.BeginForm("Index", "Clients"))
-            {
-                @Html.Label("Enter client name or surname");
-                @:&nbsp;
-                @Html.TextBox("searchInput", "");
-            }
-        }
+<fieldset name="Search">
+    <legend>Search for a client</legend>
+    @{
+        using (Html.BeginForm("Index", "Clients"))
+        {
+            @Html.Label("Enter client name or surname")
+            ;
+            @:&nbsp;
+            @Html.TextBox("searchInput", "")
+            ;
 
-    </fieldset>
+            <input type="submit" value="Submit"/>
+        }
+    }
+</fieldset>
 
     <table class="table">
         <tr>
