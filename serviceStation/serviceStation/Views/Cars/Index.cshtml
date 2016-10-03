@@ -73,7 +73,7 @@
             grid.Column(columnName: "Year", header: "Year"),
             grid.Column(columnName: "VIN", header: "VIN"),
             grid.Column(format: item => Html.ActionLink("Edit", "Edit", new { id = item.CarId })),
-            grid.Column(format: item => Html.ActionLink("Details", "Details", new { id = item.CarId })),
+            grid.Column(format: item => Html.ActionLink("Orders", "Index", new { controller = "Orders", id = item.CarId })),
             grid.Column(format: item => Html.ActionLink("Delete", "Delete", new { id = item.CarId }))))
     </div>
     <div>

@@ -16,10 +16,18 @@ namespace serviceStation.Controllers
         private ServiceStationContext db = new ServiceStationContext();
 
         // GET: Orders
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var orders = db.Orders.Include(o => o.Car);
-            return View(orders.ToList());
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var car = db.Cars.Find(id);
+            if (car == null)
+            {
+                return HttpNotFound();
+            }
+            return View(car.Orders.ToList());
         }
 
         // GET: Orders/Details/5

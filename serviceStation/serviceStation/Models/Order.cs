@@ -5,7 +5,7 @@ using System.Web;
 
 namespace serviceStation.Models
 {
-    using Price = System.Int32;
+    using Price = System.Double;
     public class Order
     {
         public int OrderId { get; set; }

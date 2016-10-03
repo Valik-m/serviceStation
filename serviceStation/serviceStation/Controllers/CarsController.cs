@@ -23,6 +23,10 @@ namespace serviceStation.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Client client = db.Clients.Find(id);
+            if (client == null)
+            {
+                return HttpNotFound();
+            }
             HttpCookie cookie = new HttpCookie("Client", id.ToString());
             Response.Cookies.Add(cookie);
             return View(client);

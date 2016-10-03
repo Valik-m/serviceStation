@@ -1,4 +1,4 @@
-﻿@model IEnumerable<serviceStation.Models.Order>
+﻿@model serviceStation.Models.Car
 
 @{
     Layout = null;
@@ -12,42 +12,101 @@
     <title>Index</title>
 </head>
 <body>
+    <div>
+        <h4>Car</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Make)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Make)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Model)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Model)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Year)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Year)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Vin)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Vin)
+            </dd>
+
+        </dl>
+    </div>
+    <div>
+        @{
+            var grid = new WebGrid(source: Model.Orders, rowsPerPage: 5);
+        }
+        @grid.GetHtml(columns: grid.Columns(
+            grid.Column(columnName: "Date", header: "Date"),
+            grid.Column(columnName: "Amount", header: "Amount"),
+            grid.Column(columnName: "Status", header: "Status"),
+            grid.Column(format: item => Html.ActionLink("Edit", "Edit", new { id = item.OrderId })),
+            grid.Column(format: item => Html.ActionLink("Orders", "Index", new { controller = "Orders", id = item.OrderId })),
+            grid.Column(format: item => Html.ActionLink("Delete", "Delete", new { id = item.OrderId }))))
+    </div>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create new order", "Create")
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.OrderId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.OrderId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.OrderId })
-            </td>
-        </tr>
-    }
-    
-    </table>
+        @*<table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.OrderId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.OrderId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.OrderId })
+                    </td>
+                </tr>
+            }
+
+        </table>*@
 </body>
 </html>
