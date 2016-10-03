@@ -11,11 +11,18 @@ namespace serviceStation.Models
     public class Order
     {
         public int OrderId { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
+
+        [Required(ErrorMessage = "Amount is required")]
         public Price Amount { get; set; }
+
+        [Required(ErrorMessage = "Status is required")]
         public OrderStatus Status { get; set; }
+
         public int CarId { get; set; }
+
         public virtual Car Car { get; set; }
     }
     public enum OrderStatus
