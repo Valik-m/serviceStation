@@ -25,7 +25,6 @@ namespace serviceStation.Models
 
         public virtual List<Order> Orders { get; set; }
 
-        [HiddenInput]
         public int ClientId { get; set; }
 
         public virtual Client Client { get; set; }
