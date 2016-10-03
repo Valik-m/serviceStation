@@ -27,7 +27,7 @@ namespace serviceStation.Controllers
             {
                 return HttpNotFound();
             }
-            return View(car.Orders.ToList());
+            return View(car);
         }
 
         // GET: Orders/Details/5

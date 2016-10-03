@@ -14,6 +14,7 @@ namespace serviceStation.DAL
 
         public ServiceStationContext() : base ("ServiceStationContext")
         {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ServiceStationContext>());
         }    
 
         public DbSet<Client> Clients { get; set; }
