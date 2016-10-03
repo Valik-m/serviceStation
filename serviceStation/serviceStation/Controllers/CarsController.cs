@@ -23,14 +23,20 @@ namespace serviceStation.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Client client = db.Clients.Find(id);
+            HttpCookie cookie = new HttpCookie("Client", id.ToString());
+            Response.Cookies.Add(cookie);
             return View(client);
         }
 
         // GET: Cars/Create
         public ActionResult Create()
         {
-            ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FirstName");
-            return View();
+            if (Request.Cookies["Client"] != null)
+            {
+                ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FirstName", Convert.ToInt32(Request.Cookies["Client"].Value));
+                return View();
+            }
+            else return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         // POST: Cars/Create
@@ -44,7 +50,7 @@ namespace serviceStation.Controllers
             {
                 db.Cars.Add(car);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = car.ClientId});
             }
 
             ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FirstName", car.ClientId);
@@ -78,7 +84,7 @@ namespace serviceStation.Controllers
             {
                 db.Entry(car).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = car.ClientId});
             }
             ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FirstName", car.ClientId);
             return View(car);
@@ -107,7 +113,7 @@ namespace serviceStation.Controllers
             Car car = db.Cars.Find(id);
             db.Cars.Remove(car);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = car.ClientId });
         }
 
         protected override void Dispose(bool disposing)

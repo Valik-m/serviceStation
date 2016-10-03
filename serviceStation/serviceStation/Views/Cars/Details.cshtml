@@ -60,7 +60,7 @@
     </div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.CarId }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index", new { id = Model.ClientId })
     </p>
 </body>
 </html>

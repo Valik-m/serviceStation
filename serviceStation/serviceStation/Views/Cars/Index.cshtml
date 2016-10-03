@@ -2,7 +2,6 @@
 
 @{
     Layout = null;
-    var testCar = Model.Cars.First();
 }
 
 <!DOCTYPE html>
@@ -66,50 +65,20 @@
 
         </dl>
         @{
-            var grid = new WebGrid(source: Model.Cars);
+            var grid = new WebGrid(source: Model.Cars, rowsPerPage: 5);
         }
-       @grid.GetHtml();
-<table class="table">
-<tr>
-    <th>
-        @Html.DisplayNameFor(model => testCar.Model)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => testCar.Make)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => testCar.Year)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => testCar.Vin)
-    </th>
-    <th></th>
-</tr>
-
-@foreach (var item in Model.Cars)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => testCar.Model)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => testCar.Make)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => testCar.Year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => testCar.Vin)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.CarId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.CarId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.CarId })
-        </td>
-    </tr>
-}
-
-</table>
+        @grid.GetHtml(columns: grid.Columns(
+            grid.Column(columnName: "Model", header: "Model"),
+            grid.Column(columnName: "Make", header: "Make"),
+            grid.Column(columnName: "Year", header: "Year"),
+            grid.Column(columnName: "VIN", header: "VIN"),
+            grid.Column(format: item => Html.ActionLink("Edit", "Edit", new { id = item.CarId })),
+            grid.Column(format: item => Html.ActionLink("Details", "Details", new { id = item.CarId })),
+            grid.Column(format: item => Html.ActionLink("Delete", "Delete", new { id = item.CarId }))))
+    </div>
+    <div>
+        @Html.ActionLink("Create new car", "Create", new { id = Model.ClientId})
+    </div>
 </body>
 
 </html>
