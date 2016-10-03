@@ -17,8 +17,8 @@ namespace serviceStation.Models
         [Required(ErrorMessage = "Model is required")]
         public string Model { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime Year { get; set; }
+        [RangeYearToCurrent(1768, ErrorMessage = "Invalid year is provided")]
+        public int Year { get; set; }
 
         [Required(ErrorMessage = "Vin is required")]
         public string Vin { get; set; }
