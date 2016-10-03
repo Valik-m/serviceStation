@@ -9,17 +9,24 @@ namespace serviceStation.Models
     public class Client
     {
         public int ClientId { get; set; }
-        [Required(ErrorMessage ="You don't enter first name")]
+
+        [Required(ErrorMessage ="First Name is required")]
         public string FirstName { get; set; }
-        [Required(ErrorMessage = "You don't enter last name")]
+
+        [Required(ErrorMessage = "Last Name is required")]
         public string LastName { get; set; }
+
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "You don't enter birthday")]
+        [Required(ErrorMessage = "Birthday is required")]
         public DateTime Birthday { get; set; }
+
         public string Address { get; set; }
+
         public string Phone { get; set; }
+
         [UIHint("Email")]
         public string Email { get; set; }
+
         public virtual List<Car> Cars { get; set; }
     }
 }
