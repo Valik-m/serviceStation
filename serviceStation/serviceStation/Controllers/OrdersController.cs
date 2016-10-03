@@ -27,6 +27,8 @@ namespace serviceStation.Controllers
             {
                 return HttpNotFound();
             }
+            HttpCookie cookie = new HttpCookie("Car", id.ToString());
+            Response.Cookies.Add(cookie);
             return View(car);
         }
 
@@ -48,8 +50,12 @@ namespace serviceStation.Controllers
         // GET: Orders/Create
         public ActionResult Create()
         {
-            ViewBag.CarId = new SelectList(db.Cars, "CarId", "Make");
-            return View();
+            if (Request.Cookies["Car"] != null)
+            {
+                ViewBag.CarId = new SelectList(db.Cars, "CarId", "Make", Convert.ToInt32(Request.Cookies["Car"].Value));
+                return View();
+            }
+            else return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         // POST: Orders/Create
@@ -63,7 +69,7 @@ namespace serviceStation.Controllers
             {
                 db.Orders.Add(order);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {id = order.CarId});
             }
 
             ViewBag.CarId = new SelectList(db.Cars, "CarId", "Make", order.CarId);
@@ -97,7 +103,7 @@ namespace serviceStation.Controllers
             {
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = order.CarId });
             }
             ViewBag.CarId = new SelectList(db.Cars, "CarId", "Make", order.CarId);
             return View(order);
@@ -126,7 +132,7 @@ namespace serviceStation.Controllers
             Order order = db.Orders.Find(id);
             db.Orders.Remove(order);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = order.CarId });
         }
 
         protected override void Dispose(bool disposing)

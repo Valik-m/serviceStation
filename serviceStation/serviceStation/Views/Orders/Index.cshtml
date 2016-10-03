@@ -60,7 +60,6 @@
             grid.Column(columnName: "Amount", header: "Amount"),
             grid.Column(columnName: "Status", header: "Status"),
             grid.Column(format: item => Html.ActionLink("Edit", "Edit", new { id = item.OrderId })),
-            grid.Column(format: item => Html.ActionLink("Orders", "Index", new { controller = "Orders", id = item.OrderId })),
             grid.Column(format: item => Html.ActionLink("Delete", "Delete", new { id = item.OrderId }))))
     </div>
     <p>
