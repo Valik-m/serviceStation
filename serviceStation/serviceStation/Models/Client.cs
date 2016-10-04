@@ -20,11 +20,13 @@ namespace serviceStation.Models
         [Required(ErrorMessage = "Birthday is required")]
         public DateTime Birthday { get; set; }
 
+        [Required(ErrorMessage = "Adress is required")]
         public string Address { get; set; }
 
+        [Required(ErrorMessage = "Phone is required")]
         public string Phone { get; set; }
 
-        [UIHint("Email")]
+        [DataType("Email")]
         public string Email { get; set; }
 
         public virtual List<Car> Cars { get; set; }

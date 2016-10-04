@@ -1,0 +1,23 @@
+﻿@model serviceStation.Models.Car
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ErrorDelete</title>
+    <p>
+        You cannot delete car with order
+    </p>
+    <div>
+        @Html.Action("Index", "cars", new {id = Model.ClientId})
+    </div>
+</head>
+<body>
+    <div> 
+    </div>
+</body>
+</html>

@@ -102,7 +102,13 @@ namespace serviceStation.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Car car = db.Cars.Find(id);
-            return View(car);
+            if (car==null)
+            {
+                return HttpNotFound();
+            }
+            if (car.Orders.Count != 0)
+                return View("ErrorDelete", car);
+            else return View(car);
         }
 
         // POST: Cars/Delete/5
@@ -111,11 +117,10 @@ namespace serviceStation.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Car car = db.Cars.Find(id);
-            if (car.Orders.Count == 0)
-            { 
+          
                 db.Cars.Remove(car);
                 db.SaveChanges();
-            }
+            
             return RedirectToAction("Index", new { id = car.ClientId });
         }
 
