@@ -12,8 +12,12 @@
     <title>Index</title>
 </head>
 <body>
+<div>
     <div>
-        <h4>Client</h4>
+        @Html.ActionLink("Back to client list", "Index", new { controller = "Clients" })
+    </div>
+    <fieldset>
+        <legend>Client</legend>
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.FirstName)
@@ -64,18 +68,19 @@
             </dd>
 
         </dl>
-        @{
-            var grid = new WebGrid(source: Model.Cars, rowsPerPage: 5);
-        }
-        @grid.GetHtml(columns: grid.Columns(
-            grid.Column(columnName: "Model", header: "Model"),
-            grid.Column(columnName: "Make", header: "Make"),
-            grid.Column(columnName: "Year", header: "Year"),
-            grid.Column(columnName: "VIN", header: "VIN"),
-            grid.Column(format: item => Html.ActionLink("Edit", "Edit", new { id = item.CarId })),
-            grid.Column(format: item => Html.ActionLink("Orders", "Index", new { controller = "Orders", id = item.CarId })),
-            grid.Column(format: item => Html.ActionLink("Delete", "Delete", new { id = item.CarId }))))
-    </div>
+    </fieldset>
+    @{
+        var grid = new WebGrid(source: Model.Cars, rowsPerPage: 5);
+    }
+    @grid.GetHtml(columns: grid.Columns(
+        grid.Column(columnName: "Model", header: "Model"),
+        grid.Column(columnName: "Make", header: "Make"),
+        grid.Column(columnName: "Year", header: "Year"),
+        grid.Column(columnName: "VIN", header: "VIN"),
+        grid.Column(format: item => Html.ActionLink("Edit", "Edit", new {id = item.CarId})),
+        grid.Column(format: item => Html.ActionLink("Orders", "Index", new {controller = "Orders", id = item.CarId})),
+        grid.Column(format: item => Html.ActionLink("Delete", "Delete", new {id = item.CarId}))))
+</div>
     <div>
         @Html.ActionLink("Create new car", "Create", new { id = Model.ClientId})
     </div>

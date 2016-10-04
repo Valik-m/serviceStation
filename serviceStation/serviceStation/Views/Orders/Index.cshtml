@@ -12,11 +12,14 @@
     <title>Index</title>
 </head>
 <body>
+<div>
     <div>
-        <h4>Car</h4>
-        <hr />
+        @Html.ActionLink("Back to car list", "Index", new {controller = "Cars", id = Model.ClientId})
+    </div>
+    <fieldset>
+        <legend>Car</legend>
         <dl class="dl-horizontal">
-            
+
             <dt>
                 @Html.DisplayNameFor(model => model.Model)
             </dt>
@@ -50,7 +53,8 @@
             </dd>
 
         </dl>
-    </div>
+    </fieldset>
+</div>
     <div>
         @{
             var grid = new WebGrid(source: Model.Orders, rowsPerPage: 5);
